@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - run: cargo fmt --all --check
+      - run: cargo fmt --manifest-path tests/consumer/Cargo.toml --check
+
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        toolchain: [stable, "1.85.0"]
+        args: ["", "--no-default-features", "--no-default-features --features serde", "--no-default-features --features json", "--no-default-features --features topic", "--no-default-features --features topic,serde", "--no-default-features --features topic,json", "--all-features"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          components: clippy
+      - run: cargo test --locked ${{ matrix.args }}
+      - run: cargo clippy --locked --all-targets ${{ matrix.args }} -- -D warnings
+      - run: cargo doc --locked --no-deps ${{ matrix.args }}
+        env:
+          RUSTDOCFLAGS: -D warnings
+      - name: Assert schema validation remains dev-only
+        run: bash scripts/check-dependencies.sh ${{ matrix.args }}
+
+  consumer:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        toolchain: [stable, "1.85.0"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          components: clippy
+      - run: cargo run --locked --manifest-path tests/consumer/Cargo.toml
+      - run: cargo clippy --locked --manifest-path tests/consumer/Cargo.toml -- -D warnings

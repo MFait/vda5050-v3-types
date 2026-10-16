@@ -1,0 +1,20 @@
+{
+  "headerId": 0,
+  "timestamp": "2017-04-15T11:40:03.123Z",
+  "version": "3.0.0",
+  "manufacturer": "Example",
+  "serialNumber": "robot-1",
+  "orderId": "",
+  "orderUpdateId": 0,
+  "lastNodeId": "",
+  "lastNodeSequenceId": 0,
+  "nodeStates": [],
+  "edgeStates": [],
+  "driving": false,
+  "actionStates": [],
+  "instantActionStates": [],
+  "powerSupply": {"stateOfCharge": 100.0, "charging": false},
+  "operatingMode": "STARTUP",
+  "errors": [],
+  "safetyState": {"activeEmergencyStop": "NONE", "fieldViolation": false}
+}

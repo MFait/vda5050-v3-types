@@ -1,0 +1,71 @@
+{
+  "headerId": 5,
+  "timestamp": "2017-04-15T11:40:03.123Z",
+  "version": "3.0.0",
+  "manufacturer": "Example",
+  "serialNumber": "robot-1",
+  "maps": [{"mapId": "floor-1", "mapVersion": "1", "mapStatus": "ENABLED", "mapDescriptor": "First floor"}],
+  "zoneSets": [{"zoneSetId": "zones-1", "mapId": "floor-1", "zoneSetStatus": "ENABLED"}],
+  "orderId": "order-1",
+  "orderUpdateId": 0,
+  "lastNodeId": "station-a",
+  "lastNodeSequenceId": 0,
+  "nodeStates": [{
+    "nodeId": "station-b",
+    "sequenceId": 2,
+    "nodeDescriptor": "Destination",
+    "released": true,
+    "nodePosition": {"x": 2.0, "y": 2.0, "theta": 0.0, "mapId": "floor-1"}
+  }],
+  "edgeStates": [{
+    "edgeId": "a-b",
+    "sequenceId": 1,
+    "edgeDescriptor": "Station link",
+    "released": true,
+    "trajectory": {"degree": 1, "knotVector": [0.0, 0.0, 1.0, 1.0], "controlPoints": [{"x": 1.0, "y": 2.0, "weight": 1.0}, {"x": 2.0, "y": 2.0}]}
+  }],
+  "plannedPath": {
+    "trajectory": {"degree": 1, "knotVector": [0.0, 0.0, 1.0, 1.0], "controlPoints": [{"x": 1.0, "y": 2.0, "weight": 1.0}, {"x": 2.0, "y": 2.0}]},
+    "traversedNodes": ["station-b"]
+  },
+  "intermediatePath": {"polyline": [{"x": 1.5, "y": 2.0, "theta": 0.0, "eta": "2017-04-15T11:40:04.123Z"}]},
+  "mobileRobotPosition": {"x": 1.0, "y": 2.0, "theta": 0.0, "mapId": "floor-1", "localized": true, "localizationScore": 0.9, "deviationRange": 0.1},
+  "velocity": {"vx": 0.5, "vy": 0.0, "omega": 0.1},
+  "loads": [{
+    "loadId": "load-1",
+    "loadType": "pallet",
+    "loadPosition": "front",
+    "boundingBoxReference": {"x": 0.0, "y": 0.0, "z": 0.2, "theta": 0.0},
+    "loadDimensions": {"length": 1.2, "width": 0.8, "height": 1.0},
+    "weight": 100.0
+  }],
+  "driving": true,
+  "paused": false,
+  "newBaseRequest": false,
+  "zoneRequests": [{
+    "requestId": "zone-request-1",
+    "requestType": "REPLANNING",
+    "zoneId": "zone-1",
+    "zoneSetId": "zones-1",
+    "requestStatus": "REQUESTED",
+    "trajectory": {"degree": 1, "knotVector": [0.0, 0.0, 1.0, 1.0], "controlPoints": [{"x": 1.0, "y": 2.0, "weight": 1.0}, {"x": 2.0, "y": 2.0}]}
+  }],
+  "edgeRequests": [{"requestId": "edge-request-1", "requestType": "CORRIDOR", "edgeId": "a-b", "sequenceId": 1, "requestStatus": "GRANTED"}],
+  "distanceSinceLastNode": 0.5,
+  "actionStates": [{"actionId": "signal-1", "actionType": "vendorSignal", "actionDescriptor": "Signal", "actionStatus": "RETRIABLE", "actionResult": "Retry requested"}],
+  "instantActionStates": [{"actionId": "instant-1", "actionType": "stateRequest", "actionDescriptor": "Report", "actionStatus": "FINISHED", "actionResult": "Reported"}],
+  "zoneActionStates": [{"actionId": "zone-action-1", "actionType": "vendorZone", "actionDescriptor": "Zone monitor", "actionStatus": "RUNNING", "actionResult": "Monitoring"}],
+  "powerSupply": {"stateOfCharge": 80.5, "batteryVoltage": 48.0, "batteryCurrent": -2.0, "batteryHealth": 95, "charging": false, "range": 1000},
+  "operatingMode": "AUTOMATIC",
+  "errors": [{
+    "errorType": "vendor.warning",
+    "errorReferences": [{"referenceKey": "orderId", "referenceValue": "order-1"}],
+    "errorDescription": "Inspect load",
+    "errorDescriptionTranslations": [{"translationKey": "de", "translationValue": "Ladung pruefen"}],
+    "errorHint": "Check attachment",
+    "errorHintTranslations": [{"translationKey": "de", "translationValue": "Befestigung pruefen"}],
+    "errorLevel": "WARNING"
+  }],
+  "information": [{"infoType": "vendor.info", "infoReferences": [{"referenceKey": "nodeId", "referenceValue": "station-b"}], "infoDescriptor": "Approaching", "infoLevel": "INFO"}],
+  "safetyState": {"activeEmergencyStop": "NONE", "fieldViolation": false}
+}

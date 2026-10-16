@@ -1,0 +1,13 @@
+{
+  "headerId": 0,
+  "timestamp": "2017-04-15T11:40:03.123Z",
+  "version": "3.0.0",
+  "manufacturer": "Example",
+  "serialNumber": "robot-1",
+  "typeSpecification": {"seriesName": "Example", "mobileRobotKinematics": "DIFFERENTIAL", "mobileRobotClass": "CARRIER", "maximumLoadMass": 0.0, "localizationTypes": [], "navigationTypes": []},
+  "physicalParameters": {"minimumSpeed": 0.0, "maximumSpeed": 1.0, "maximumAcceleration": 0.5, "maximumDeceleration": 0.5, "minimumHeight": 0.3, "maximumHeight": 0.3, "width": 0.8, "length": 1.2},
+  "protocolLimits": {"maximumStringLengths": {}, "maximumArrayLengths": {}, "timing": {"minimumOrderInterval": 0.125, "minimumStateInterval": 0.25}},
+  "protocolFeatures": {"optionalParameters": [], "mobileRobotActions": []},
+  "mobileRobotGeometry": {},
+  "loadSpecification": {}
+}

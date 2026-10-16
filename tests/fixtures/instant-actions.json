@@ -1,0 +1,28 @@
+{
+  "headerId": 1,
+  "timestamp": "2017-04-15T11:40:03.123Z",
+  "version": "3.0.0",
+  "manufacturer": "Example",
+  "serialNumber": "robot-1",
+  "actions": [
+    {
+      "actionId": "signal-1",
+      "actionType": "vendorSignal",
+      "actionDescriptor": "Custom signal",
+      "blockingType": "NONE",
+      "actionParameters": [
+        {"key": "enabled", "value": true},
+        {"key": "duration", "value": 103.2},
+        {"key": "direction", "value": "left"},
+        {"key": "count", "value": 5},
+        {"key": "array", "value": ["nested", null, {"enabled": true}]},
+        {"key": "object", "value": {"optional": null, "ids": [1, 2]}}
+      ]
+    },
+    {
+      "actionId": "pause-1",
+      "actionType": "startPause",
+      "blockingType": "NONE"
+    }
+  ]
+}

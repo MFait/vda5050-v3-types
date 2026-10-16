@@ -1,0 +1,13 @@
+{
+  "headerId": 4,
+  "timestamp": "2017-04-15T11:40:03.123Z",
+  "version": "3.0.0",
+  "manufacturer": "Example",
+  "serialNumber": "robot-1",
+  "responses": [
+    {"requestId": "request-1", "grantType": "GRANTED", "leaseExpiry": "2017-04-15T11:45:03.123Z"},
+    {"requestId": "request-2", "grantType": "QUEUED"},
+    {"requestId": "request-3", "grantType": "REVOKED"},
+    {"requestId": "request-4", "grantType": "REJECTED"}
+  ]
+}

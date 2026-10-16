@@ -1,0 +1,72 @@
+{
+  "headerId": 2,
+  "timestamp": "2017-04-15T11:40:03.123Z",
+  "version": "3.0.0",
+  "manufacturer": "Example",
+  "serialNumber": "robot-1",
+  "orderId": "order-1",
+  "orderUpdateId": 0,
+  "orderDescription": "Move between two stations",
+  "nodes": [
+    {
+      "nodeId": "station-a",
+      "sequenceId": 0,
+      "nodeDescriptor": "Departure",
+      "released": true,
+      "nodePosition": {
+        "x": 1.0,
+        "y": 2.0,
+        "theta": 0.0,
+        "allowedDeviationXY": {"a": 0.2, "b": 0.1, "theta": 0.0},
+        "allowedDeviationTheta": 0.1,
+        "mapId": "floor-1"
+      },
+      "actions": [
+        {
+          "actionType": "vendorSignal",
+          "actionId": "signal-1",
+          "actionDescriptor": "Departure signal",
+          "blockingType": "SINGLE",
+          "actionParameters": [{"key": "enabled", "value": {"nested": [true, null]}}],
+          "retriable": true
+        }
+      ]
+    },
+    {
+      "nodeId": "station-b",
+      "sequenceId": 2,
+      "released": true,
+      "actions": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "a-b",
+      "sequenceId": 1,
+      "edgeDescriptor": "Station link",
+      "released": true,
+      "maximumSpeed": 1.5,
+      "maximumMobileRobotHeight": 2.0,
+      "minimumLoadHandlingDeviceHeight": 0.1,
+      "orientation": 0.0,
+      "orientationType": "TANGENTIAL",
+      "direction": "straight",
+      "reachOrientationBeforeEntering": false,
+      "maximumRotationSpeed": 0.5,
+      "trajectory": {
+        "degree": 1,
+        "knotVector": [0.0, 0.0, 1.0, 1.0],
+        "controlPoints": [{"x": 1.0, "y": 2.0, "weight": 1.0}, {"x": 2.0, "y": 2.0}]
+      },
+      "length": 1.0,
+      "corridor": {
+        "leftWidth": 0.5,
+        "rightWidth": 0.5,
+        "corridorReferencePoint": "CONTOUR",
+        "releaseRequired": true,
+        "releaseLossBehavior": "RETURN"
+      },
+      "actions": [{"actionType": "vendorMonitor", "actionId": "monitor-1", "blockingType": "NONE"}]
+    }
+  ]
+}

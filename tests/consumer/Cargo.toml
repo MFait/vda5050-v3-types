@@ -1,0 +1,11 @@
+[package]
+name = "vda5050-consumer-check"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+
+[workspace]
+
+[dependencies]
+vda5050-v3-types = { path = "../..", features = ["json"] }

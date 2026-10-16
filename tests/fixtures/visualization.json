@@ -1,0 +1,35 @@
+{
+  "headerId": 12,
+  "timestamp": "2017-04-15T11:40:03.123Z",
+  "version": "3.0.0",
+  "manufacturer": "Example",
+  "serialNumber": "robot-1",
+  "referenceStateHeaderId": 10,
+  "plannedPath": {
+    "trajectory": {
+      "degree": 1,
+      "knotVector": [0.0, 0.0, 1.0, 1.0],
+      "controlPoints": [
+        {"x": 1.0, "y": 2.0, "weight": 1.0},
+        {"x": 3.0, "y": 4.0, "weight": 1.0}
+      ]
+    },
+    "traversedNodes": ["node-1", "node-2"]
+  },
+  "intermediatePath": {
+    "polyline": [
+      {"x": 1.0, "y": 2.0, "theta": 0.0, "eta": "2017-04-15T11:40:03.123Z"},
+      {"x": 3.0, "y": 4.0, "eta": "2017-04-15T11:40:05.123Z"}
+    ]
+  },
+  "mobileRobotPosition": {
+    "x": 1.0,
+    "y": 2.0,
+    "theta": 0.0,
+    "mapId": "floor-1",
+    "localized": true,
+    "localizationScore": 0.95,
+    "deviationRange": 0.05
+  },
+  "velocity": {"vx": 0.5, "vy": -0.1, "omega": 0.2}
+}

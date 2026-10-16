@@ -1,0 +1,36 @@
+{
+  "headerId": 7,
+  "timestamp": "2017-04-15T11:40:03.123Z",
+  "version": "3.0.0",
+  "manufacturer": "Example",
+  "serialNumber": "robot-1",
+  "zoneSet": {
+    "mapId": "map-1",
+    "zoneSetId": "zones-1",
+    "zoneSetDescriptor": "Example zones",
+    "zones": [
+      {"zoneId": "blocked", "zoneType": "BLOCKED", "zoneDescriptor": "No access", "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}]},
+      {"zoneId": "line", "zoneType": "LINE_GUIDED", "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}]},
+      {"zoneId": "release", "zoneType": "RELEASE", "releaseLossBehavior": "STOP", "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}]},
+      {"zoneId": "replan", "zoneType": "COORDINATED_REPLANNING", "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}]},
+      {"zoneId": "speed", "zoneType": "SPEED_LIMIT", "maximumSpeed": 1.5, "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}]},
+      {
+        "zoneId": "action", "zoneType": "ACTION",
+        "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}],
+        "entryActions": [{
+          "actionType": "vendor.signal",
+          "actionDescriptor": "Signal on entry",
+          "blockingType": "NONE",
+          "actionParameters": [{"key": "settings", "value": {"enabled": true, "nested": [null, 42]}}],
+          "retriable": true
+        }],
+        "duringActions": [],
+        "exitActions": []
+      },
+      {"zoneId": "priority", "zoneType": "PRIORITY", "priorityFactor": 0.25, "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}]},
+      {"zoneId": "penalty", "zoneType": "PENALTY", "penaltyFactor": 0.75, "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}]},
+      {"zoneId": "directed", "zoneType": "DIRECTED", "direction": 0.0, "directedLimitation": "STRICT", "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}]},
+      {"zoneId": "bidirected", "zoneType": "BIDIRECTED", "direction": 0.0, "bidirectedLimitation": "RESTRICTED", "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}]}
+    ]
+  }
+}

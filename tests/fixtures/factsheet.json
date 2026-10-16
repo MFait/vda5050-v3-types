@@ -1,0 +1,128 @@
+{
+  "headerId": 6,
+  "timestamp": "2017-04-15T11:40:03.123Z",
+  "version": "3.0.0",
+  "manufacturer": "Example",
+  "serialNumber": "robot-1",
+  "typeSpecification": {
+    "seriesName": "Example One",
+    "seriesDescription": "General purpose carrier",
+    "mobileRobotKinematics": "DIFFERENTIAL",
+    "mobileRobotClass": "CARRIER",
+    "maximumLoadMass": 1000.0,
+    "localizationTypes": ["NATURAL"],
+    "navigationTypes": ["FREELY_NAVIGATING"],
+    "supportedZones": ["BLOCKED", "LINE_GUIDED", "RELEASE", "COORDINATED_REPLANNING", "SPEED_LIMIT", "ACTION", "PRIORITY", "PENALTY", "DIRECTED", "BIDIRECTED"]
+  },
+  "physicalParameters": {
+    "minimumSpeed": 0.1,
+    "maximumSpeed": 2.0,
+    "minimumAngularSpeed": 0.1,
+    "maximumAngularSpeed": 1.0,
+    "maximumAcceleration": 0.5,
+    "maximumDeceleration": 0.6,
+    "minimumHeight": 0.3,
+    "maximumHeight": 1.0,
+    "width": 0.8,
+    "length": 1.2
+  },
+  "protocolLimits": {
+    "maximumStringLengths": {
+      "maximumMessageLength": 100000,
+      "maximumTopicSerialLength": 100,
+      "maximumTopicElementLength": 100,
+      "maximumIdLength": 100,
+      "idNumericalOnly": false,
+      "maximumLoadIdLength": 100
+    },
+    "maximumArrayLengths": {
+      "order.nodes": 100,
+      "order.edges": 100,
+      "node.actions": 10,
+      "edge.actions": 10,
+      "actions.actionsParameters": 10,
+      "instantActions": 10,
+      "trajectory.knotVector": 100,
+      "trajectory.controlPoints": 100,
+      "zoneSet.zones": 100,
+      "state.nodeStates": 100,
+      "state.edgeStates": 100,
+      "state.loads": 10,
+      "state.actionStates": 100,
+      "state.instantActionStates": 100,
+      "state.zoneActionStates": 100,
+      "state.errors": 100,
+      "state.information": 100,
+      "error.errorReferences": 10,
+      "information.infoReferences": 10
+    },
+    "timing": {"minimumOrderInterval": 0.125, "minimumStateInterval": 0.25, "defaultStateInterval": 1.0, "visualizationInterval": 0.5}
+  },
+  "protocolFeatures": {
+    "optionalParameters": [{"parameter": "order.nodes.nodePosition.theta", "support": "SUPPORTED", "description": "Orientation supported"}],
+    "mobileRobotActions": [{
+      "actionType": "vendorSignal",
+      "actionDescription": "Signals a device",
+      "actionScopes": ["INSTANT", "NODE", "EDGE", "ZONE"],
+      "actionParameters": [{"key": "enabled", "valueDataType": "BOOL", "description": "Enable signal", "isOptional": false}],
+      "actionResult": "Signal result",
+      "blockingTypes": ["NONE", "SOFT", "SINGLE", "HARD"],
+      "pauseAllowed": true,
+      "cancelAllowed": true
+    }]
+  },
+  "mobileRobotGeometry": {
+    "wheelDefinitions": [{
+      "type": "DRIVE",
+      "isActiveDriven": true,
+      "isActiveSteered": false,
+      "position": {"x": 0.0, "y": 0.2, "theta": 0.0},
+      "diameter": 0.2,
+      "width": 0.1,
+      "centerDisplacement": 0.0,
+      "constraints": "Example wheel"
+    }],
+    "envelopes2d": [{"envelope2dId": "body", "vertices": [{"x": 0.0, "y": 0.0}, {"x": 1.0, "y": 0.0}, {"x": 0.0, "y": 1.0}], "description": "Body outline"}],
+    "envelopes3d": [{
+      "envelope3dId": "body",
+      "format": "vendor-json",
+      "data": {"mesh": [1, null, {"vendorKey": true}]},
+      "url": "https://example.invalid/robot",
+      "description": "Body mesh"
+    }]
+  },
+  "loadSpecification": {
+    "loadPositions": ["front"],
+    "loadSets": [{
+      "setName": "DEFAULT",
+      "loadType": "pallet",
+      "loadPositions": ["front"],
+      "boundingBoxReference": {"x": 0.0, "y": 0.0, "z": 0.2, "theta": 0.0},
+      "loadDimensions": {"length": 1.2, "width": 0.8, "height": 1.0},
+      "maximumWeight": 1000.0,
+      "minimumLoadhandlingHeight": 0.0,
+      "maximumLoadhandlingHeight": 1.0,
+      "minimumLoadhandlingDepth": 0.0,
+      "maximumLoadhandlingDepth": 1.0,
+      "minimumLoadhandlingTilt": -0.2,
+      "maximumLoadhandlingTilt": 0.2,
+      "maximumSpeed": 1.0,
+      "maximumAcceleration": 0.5,
+      "maximumDeceleration": 0.6,
+      "pickTime": 5.0,
+      "dropTime": 5.0,
+      "description": "Pallet handling"
+    }]
+  },
+  "mobileRobotConfiguration": {
+    "versions": [{"key": "softwareVersion", "value": "1.0.0"}],
+    "network": {
+      "dnsServers": ["192.0.2.1"],
+      "ntpServers": ["time.example.invalid"],
+      "localIpAddress": "192.0.2.2",
+      "netmask": "255.255.255.0",
+      "defaultGateway": "192.0.2.1"
+    },
+    "batteryCharging": {"criticalLowChargingLevel": 10.0, "minimumDesiredChargingLevel": 20.0, "maximumDesiredChargingLevel": 90.0, "minimumChargingTime": 60}
+  }
+}
