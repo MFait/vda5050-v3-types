@@ -51,6 +51,10 @@ Use topic-directed decoding and paired encoding with `topic,json` instead.
 
 ## Examples
 
+Feature-specific snippets below are tested through the matching files in
+[examples](https://github.com/MFait/vda5050-v3-types/tree/main/examples), with
+feature requirements declared in Cargo rather than hidden in the displayed code.
+
 ### No features: construct a message
 
 All bodies and shared models are available without optional features. Add a
@@ -80,27 +84,24 @@ assert_eq!(connection.header.header_id, 0);
 Enable `serde` and add your chosen serializer as a direct dependency. This example
 uses `serde_json`; the crate's `json` convenience feature is not required.
 
-```rust
-# #[cfg(feature = "serde")]
-# fn main() -> Result<(), serde_json::Error> {
+```rust,ignore
 use vda5050_v3_types::Connection;
 
-let body = r#"{
-    "headerId": 0,
-    "timestamp": "2017-04-15T11:40:03.123Z",
-    "version": "3.0.0",
-    "manufacturer": "Example",
-    "serialNumber": "robot-1",
-    "connectionState": "ONLINE"
-}"#;
-let message: Connection = serde_json::from_str(body)?;
-let value = serde_json::to_value(&message)?;
-assert_eq!(value["connectionState"], "ONLINE");
-assert!(value.get("header").is_none()); // Header fields are flattened.
-# Ok(())
-# }
-# #[cfg(not(feature = "serde"))]
-# fn main() {}
+fn main() -> Result<(), serde_json::Error> {
+    let body = r#"{
+        "headerId": 0,
+        "timestamp": "2017-04-15T11:40:03.123Z",
+        "version": "3.0.0",
+        "manufacturer": "Example",
+        "serialNumber": "robot-1",
+        "connectionState": "ONLINE"
+    }"#;
+    let message: Connection = serde_json::from_str(body)?;
+    let value = serde_json::to_value(&message)?;
+    assert_eq!(value["connectionState"], "ONLINE");
+    assert!(value.get("header").is_none());
+    Ok(())
+}
 ```
 
 ### `json`: decode and encode payloads
@@ -108,94 +109,88 @@ assert!(value.get("header").is_none()); // Header fields are flattened.
 All eight bodies provide `from_json`, `from_json_slice`, `to_json`, and
 `to_json_vec`, returning the original `serde_json::Error`.
 
-```rust
-# #[cfg(feature = "json")]
-# fn main() -> Result<(), serde_json::Error> {
+```rust,ignore
 use vda5050_v3_types::Connection;
 
-let body = r#"{
-    "headerId": 0,
-    "timestamp": "2017-04-15T11:40:03.123Z",
-    "version": "3.0.0",
-    "manufacturer": "Example",
-    "serialNumber": "robot-1",
-    "connectionState": "ONLINE"
-}"#;
-let message = Connection::from_json(body)?;
-let payload = message.to_json_vec()?;
-assert_eq!(Connection::from_json_slice(&payload)?, message);
-# Ok(())
-# }
-# #[cfg(not(feature = "json"))]
-# fn main() {}
+fn main() -> Result<(), serde_json::Error> {
+    let body = r#"{
+        "headerId": 0,
+        "timestamp": "2017-04-15T11:40:03.123Z",
+        "version": "3.0.0",
+        "manufacturer": "Example",
+        "serialNumber": "robot-1",
+        "connectionState": "ONLINE"
+    }"#;
+    let message = Connection::from_json(body)?;
+    let payload = message.to_json_vec()?;
+    assert_eq!(Connection::from_json_slice(&payload)?, message);
+    Ok(())
+}
 ```
 
 ### `topic`: names, topics and subscription filters
 
 These helpers construct checked text, without a broker connection or JSON.
 
-```rust
-# #[cfg(feature = "topic")]
-# fn main() -> Result<(), vda5050_v3_types::topic::TopicError> {
+```rust,ignore
 use vda5050_v3_types::topic::{Topic, TopicFilter, TopicKind};
 
-assert_eq!(TopicKind::InstantActions.as_str(), "instantActions");
-let topic = Topic::new("vda5050", "KIT", "0001", TopicKind::Order)?;
-assert_eq!(topic.to_string(), "vda5050/v3/KIT/0001/order");
-assert_eq!(topic.to_string().parse::<Topic>()?, topic);
+fn main() -> Result<(), vda5050_v3_types::topic::TopicError> {
+    assert_eq!(TopicKind::InstantActions.as_str(), "instantActions");
+    let topic = Topic::new("vda5050", "KIT", "0001", TopicKind::Order)?;
+    assert_eq!(topic.to_string(), "vda5050/v3/KIT/0001/order");
+    assert_eq!(topic.to_string().parse::<Topic>()?, topic);
 
-let states = TopicFilter::new("vda5050", None, None, Some(TopicKind::State))?;
-assert_eq!(states.to_string(), "vda5050/v3/+/+/state");
-# Ok(())
-# }
-# #[cfg(not(feature = "topic"))]
-# fn main() {}
+    let states = TopicFilter::new("vda5050", None, None, Some(TopicKind::State))?;
+    assert_eq!(states.to_string(), "vda5050/v3/+/+/state");
+    Ok(())
+}
 ```
 
 ### `topic` + `serde`: checked topic strings
 
-```rust
-# #[cfg(all(feature = "topic", feature = "serde"))]
-# fn main() -> Result<(), Box<dyn std::error::Error>> {
+```rust,ignore
 use vda5050_v3_types::topic::Topic;
 
-let topic: Topic = serde_json::from_str(r#""vda5050/v3/KIT/0001/state""#)?;
-assert_eq!(serde_json::to_string(&topic)?, r#""vda5050/v3/KIT/0001/state""#);
-assert!(serde_json::from_str::<Topic>(r#""vda5050/v2/KIT/0001/state""#).is_err());
-# Ok(())
-# }
-# #[cfg(not(all(feature = "topic", feature = "serde")))]
-# fn main() {}
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let topic: Topic = serde_json::from_str(r#""vda5050/v3/KIT/0001/state""#)?;
+    assert_eq!(
+        serde_json::to_string(&topic)?,
+        r#""vda5050/v3/KIT/0001/state""#
+    );
+    assert!(serde_json::from_str::<Topic>(r#""vda5050/v2/KIT/0001/state""#).is_err());
+    Ok(())
+}
 ```
 
 ### `topic` + `json`: dispatch and checked pairing
 
-```rust
-# #[cfg(all(feature = "topic", feature = "json"))]
-# fn main() -> Result<(), Box<dyn std::error::Error>> {
+```rust,ignore
 use vda5050_v3_types::topic::{Message, Topic, TopicMessage};
 
-let topic: Topic = "vda5050/v3/KIT/0001/responses".parse()?;
-let payload = br#"{
-    "headerId": 0,
-    "timestamp": "2017-04-15T11:40:03.123Z",
-    "version": "3.0.0",
-    "manufacturer": "KIT",
-    "serialNumber": "0001",
-    "responses": []
-}"#;
-let message = topic.decode_json_slice(payload)?;
-assert!(matches!(&message, Message::Responses(_)));
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let topic: Topic = "vda5050/v3/KIT/0001/responses".parse()?;
+    let payload = br#"{
+        "headerId": 0,
+        "timestamp": "2017-04-15T11:40:03.123Z",
+        "version": "3.0.0",
+        "manufacturer": "KIT",
+        "serialNumber": "0001",
+        "responses": []
+    }"#;
+    let message = topic.decode_json_slice(payload)?;
+    assert!(matches!(&message, Message::Responses(_)));
 
-// Dispatch selects the body type; pairing separately checks header consistency.
-let pair = TopicMessage::new(topic, message)?;
-let (topic_text, payload_bytes) = pair.to_json_vec()?;
-assert_eq!(topic_text, "vda5050/v3/KIT/0001/responses");
-assert_eq!(pair.topic().decode_json_slice(&payload_bytes)?, *pair.message());
-# Ok(())
-# }
-# #[cfg(not(all(feature = "topic", feature = "json")))]
-# fn main() {}
+    // Dispatch selects the body type; pairing separately checks header consistency.
+    let pair = TopicMessage::new(topic, message)?;
+    let (topic_text, payload_bytes) = pair.to_json_vec()?;
+    assert_eq!(topic_text, "vda5050/v3/KIT/0001/responses");
+    assert_eq!(
+        pair.topic().decode_json_slice(&payload_bytes)?,
+        *pair.message()
+    );
+    Ok(())
+}
 ```
 
 ## Message models
@@ -260,21 +255,9 @@ enabled, independently of Serde or JSON.
 The result depends only on the message type; it does not inspect or validate
 header identity/version, mutate the body or construct a complete topic.
 
-Each body also provides `topic(interface)` without requiring Serde or JSON:
-
-```rust
-# #[cfg(feature = "topic")]
-# fn topic_for(order: &vda5050_v3_types::Order)
-#     -> Result<(), vda5050_v3_types::topic::HeaderTopicError> {
-use vda5050_v3_types::topic::TopicKind;
-
-let topic = order.topic("vda5050")?;
-assert_eq!(topic.kind(), TopicKind::Order);
-assert_eq!(topic.manufacturer(), order.header.manufacturer);
-assert_eq!(topic.serial_number(), order.header.serial_number);
-# Ok(())
-# }
-```
+Each body also provides `topic(interface)` without requiring Serde or JSON.
+For example, `order.topic("vda5050")?` builds a topic whose kind is
+`TopicKind::Order` and whose manufacturer/serial number come from `order.header`.
 
 This helper first requires header version **exactly `3.0.0`** (an intentional
 library compatibility policy), then copies manufacturer and serial number

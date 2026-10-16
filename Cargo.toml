@@ -19,6 +19,26 @@ exclude = [
 [package.metadata.docs.rs]
 all-features = true
 
+[[example]]
+name = "serde"
+required-features = ["serde"]
+
+[[example]]
+name = "json"
+required-features = ["json"]
+
+[[example]]
+name = "topic"
+required-features = ["topic"]
+
+[[example]]
+name = "topic_serde"
+required-features = ["topic", "serde"]
+
+[[example]]
+name = "topic_json"
+required-features = ["topic", "json"]
+
 [features]
 default = []
 serde = ["dep:serde"]

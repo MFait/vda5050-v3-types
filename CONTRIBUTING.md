@@ -15,6 +15,10 @@ are outside this library's scope.
 - Add regression tests for affected messages, exact wire names, optional/null
   behavior, numeric boundaries and feature gates as applicable.
 - Update public documentation and examples with behavior changes.
+  Feature-specific README snippets mirror the runnable files in `examples/`;
+  `tests/readme_examples.rs` checks that they match and executes them when their
+  required features are enabled. Keep these snippets free of rustdoc hidden lines
+  so they also display correctly on GitHub and crates.io.
 - Keep dependencies minimal and compatible with Rust 1.85. Schema validation
   tooling belongs only in dev-dependencies.
 
